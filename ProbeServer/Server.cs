@@ -108,6 +108,7 @@ namespace ree7.WakeMyPC.ProbeServer
 
         private const string CommandPassword = "PASSWORD/";
         private const string CommandShutdown = "SHUTDOWN/";
+        private const string CommandHibernate = "HIBERNATE/"
 
         private void OnData(string data, NetworkStream ns)
         {
@@ -132,6 +133,18 @@ namespace ree7.WakeMyPC.ProbeServer
                     action = () =>
                     {
                         Utils.System.Shutdown();
+                    };
+                }
+            }
+            else if (data.StartsWith(CommandHibernate))
+            {
+                if (CheckPassword(data.Substring(CommandShutdown.Length)))
+                {
+                    answer = "OK HIBERNATE";
+                    // System call to shutdown
+                    action = () =>
+                    {
+                        Utils.System.Hibernate();
                     };
                 }
             }
