@@ -1,5 +1,6 @@
 ﻿using System.Management;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace ree7.WakeMyPC.ProbeServer.Utils
 {
@@ -29,6 +30,11 @@ namespace ree7.WakeMyPC.ProbeServer.Utils
                 mboShutdown = manObj.InvokeMethod("Win32Shutdown",
                                                mboShutdownParams, null);
             }
+        }
+        
+        public static void Hibernate()
+        {
+            Application.SetSuspendState(PowerState.Hibernate, true, true);   
         }
     }
 }
